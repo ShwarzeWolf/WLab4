@@ -1,11 +1,12 @@
-~~выгрузить приложение hello world~~
-~~Запросить данные для Сургута~~
-~~Отрисовать данные для Сургута согласно макету~~
-~~Сделать запрос на предоставление геолокации~~
-~~добавить города~~
-~~удалять города~~
-~~Работать с избранным~~
-~~redux~~
- 
- add saga 
- add loader
+~~hello world~~ 
+
+~~fetch data from api by name~~
+~~fetch data from api by lon lat~~ 
+
+create storage 
+add city 
+delete city 
+
+troubles:
+fetch data before adding city 
+check if city is already in db 

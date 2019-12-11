@@ -23,18 +23,20 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const uri = "mongodb+srv://root:<rootroot>@weatherapp-hghcb.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
-const connection = mongoose.connection;
-
-connection.once('open', () => {
-    console.log('MongoDB connection established successfully');
-});
 
 const getWeather= require('./routes/weather');
 app.use('/weather', getWeather);
 
 const manageFavouriteCities = require('./routes/favouriteCities');
 app.use('/favourites', manageFavouriteCities);
+
+
+const uri = "mongodb://localhost:27017";
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+    console.log('MongoDB connection established successfully');
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

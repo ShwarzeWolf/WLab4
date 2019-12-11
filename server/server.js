@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -20,8 +22,19 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-const getWeather= require('./routes/weather');
 
+const uri = "mongodb+srv://root:<rootroot>@weatherapp-hghcb.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+const connection = mongoose.connection;
+
+connection.once('open', () => {
+    console.log('MongoDB connection established successfully');
+});
+
+const getWeather= require('./routes/weather');
 app.use('/weather', getWeather);
+
+const manageFavouriteCities = require('./routes/favouriteCities');
+app.use('/favourites', manageFavouriteCities);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

@@ -14,14 +14,10 @@ class WeatherBlock extends Component {
 
     formRequest(city, longitude, latitude){
         if (!!city)
-            return "http://api.openweathermap.org/data/2.5/weather?q=" +
-                city +
-                "&appid=f51bcfb8b207b0ef58ce10da80b90477";
-
-        if (!!latitude && !!longitude)
-            return "http://api.openweathermap.org/data/2.5/weather?lon=" +
-                longitude + "&lat=" + latitude +
-                "&appid=f51bcfb8b207b0ef58ce10da80b90477";
+            return "//localhost:5000/weather?city=" +
+                city;
+        else if (!!latitude && !!longitude)
+            return "//localhost:5000/weather/coordinates?lon=" + longitude + "&lat=" + latitude;
 
         return null;
     }
@@ -31,21 +27,24 @@ class WeatherBlock extends Component {
 
         const URL = await this.formRequest(city, longitude, latitude);
 
-        await fetch(URL)
+        fetch(URL)
             .then(res => res.json())
             .then(json => {
+                console.log(json);
                 if (json.cod === 200) {
                     this.setState({errorOccurred: false});
                     this.setState({errorMessage: undefined});
                     this.setState({weatherData: json});
+                    this.setState({isLoading : false});
                 }
                 else {
                     this.setState({errorMessage: json.message});
-                    this.setState({errorOccurred: true})
+                    this.setState({errorOccurred: true});
+                    this.setState({isLoading : false});
                 }
             });
 
-        this.setState({isLoading : false});
+
     };
 
     componentDidMount() {

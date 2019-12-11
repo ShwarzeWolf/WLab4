@@ -1,7 +1,7 @@
 ~~hello world~~ 
 
 ~~fetch data from api by name~~
-~~fetch data from api by lon lat~~ 
+~~fetch data from api by lon lat~~
 
 create storage 
 add city 

@@ -11,9 +11,9 @@ var db = require('knex')({
     client: 'pg',
     connection: {
         host : '127.0.0.1',
-        user : '',
+        user : 'postgres',
         password : '',
-        database : 'webLab4'
+        database : 'postgres'
     }
 });
 
@@ -38,13 +38,16 @@ app.use(bodyParser.json());
 app.use(morgan('combined'));
 
 // App Routes - Auth
-//const favouritesRouter = require('./routes/favourites');
-const weatherRouter = require('./routes/weather');
 
-//app.use('/favourites', favouritesRouter);
+const main = require('./controllers/main');
+
+app.get('/favourites', (req, res) => main.getTableData(req, res, db));
+app.post('/favourites', (req, res) => main.postTableData(req, res, db));
+app.delete('/favourites', (req, res) => main.deleteTableData(req, res, db));
+
+const weatherRouter = require('./routes/weather');
 app.use('/weather', weatherRouter);
 
-// App Server Connection
 app.listen(process.env.PORT || 5000, () => {
     console.log(`app is running on port ${process.env.PORT || 5000}`)
 });

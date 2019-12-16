@@ -11,23 +11,22 @@ const getTableData = (req, res, db) => {
 };
 
 const postTableData = (req, res, db) => {
-    const cityId = req.query.cityId;
-    const cityName = req.query.cityName;
+    const cityid = req.query.cityId;
+    const cityname = req.query.cityName;
 
-    console.log(cityId);
-    console.log(cityName);
-    db('favourites.cities').insert({cityId, cityName})
+    db('favourites.cities').insert({cityid, cityname})
         .returning('*')
         .then(item => {
             res.json(item)
         })
         .catch(err => res.status(400).json({dbError: 'db error'}))
-}
+};
 
 const deleteTableData = (req, res, db) => {
-    const { id } = req.body;
+    const cityid = req.query.cityid;
 
-    db('favourites.cities').where({id}).del()
+    console.log(cityid);
+    db('favourites.cities').where({cityid}).del()
         .then(() => {
             res.json({delete: 'true'})
         })

@@ -11,8 +11,8 @@ const getTableData = (req, res, db) => {
 };
 
 const postTableData = (req, res, db) => {
-    const cityid = req.query.cityId;
-    const cityname = req.query.cityName;
+    const cityid = req.query.cityid;
+    const cityname = req.query.cityname;
 
     db('favourites.cities').insert({cityid, cityname})
         .returning('*')

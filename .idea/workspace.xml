@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c1514415-a0a2-4c1f-832b-df73c36852f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/actions/favouriteCitiesActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/actions/favouriteCitiesActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/FavouriteCities.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/FavouriteCities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/reducers/rootReducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/main.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -102,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/controllers/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+            <state relative-caret-position="323">
+              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -397,7 +393,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="112009000" />
+    <option name="totallyTimeSpent" value="112678000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -696,8 +692,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server/controllers/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="15" column="12" selection-start-line="15" selection-start-column="12" selection-end-line="15" selection-end-column="12" />
+        <state relative-caret-position="323">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
         </state>
       </provider>
     </entry>

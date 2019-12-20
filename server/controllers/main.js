@@ -11,18 +11,17 @@ const postTableData = (req, res, db) => {
     db.select('*').from('favourites.cities').where({cityname})
         .then(items => {
            if (items.length !== 0) {
-               res.json({'db error': 'value already exists'});
                shouldInsert = false;
+               res.json({dbError: 'value already exists'});
            }
+           else
+               db('favourites.cities').insert({cityname})
+                   .returning('*')
+                   .then(item => {
+                       res.json(item)
+                   })
+                   .catch(err => res.status(400).json({dbError: 'unknown Error'}))
         });
-
-    if (shouldInsert)
-        db('favourites.cities').insert({cityname})
-            .returning('*')
-            .then(item => {
-                res.json(item)
-            })
-            .catch(err => res.status(400).json({dbError: 'db error'}))
 };
 
 const deleteTableData = (req, res, db) => {

@@ -36,13 +36,6 @@ export function citiesIsLoading(bool) {
     }
 }
 
-export function citiesUpdated(bool) {
-    return {
-        type: "CITIES_WAS_UPDATED",
-        wasUpdated: bool
-    }
-}
-
 export function addCity(data) {
     //check if city makes sense
     //check if city exists in database
@@ -52,11 +45,9 @@ export function addCity(data) {
             method: "POST"
         })
             .then(response => {
-                dispatch(citiesUpdated(true));
                 return response
             })
             .then(response => response.json())
-            .then(cities => console.log(cities))
             .catch(()=>{console.log("Something went wrong while adding new city")})
     }
 }
@@ -68,7 +59,6 @@ export function removeCity(data) {
             method: "DELETE"
         })
             .then(response => {
-                dispatch(citiesUpdated(true));
                 return response
             })
             .then(response => response.json())

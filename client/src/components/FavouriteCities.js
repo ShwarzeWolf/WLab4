@@ -7,15 +7,8 @@ import AddCity from "./AddCity";
 import {fetchFavouriteCities, addCity, removeCity} from "../actions/favouriteCitiesActions";
 
 class FavouriteCities extends Component {
-
     componentDidMount() {
         this.props.fetchData("http://localhost:5000/favourites")
-    }
-
-    componentDidUpdate(prevProps) {
-        if(this.props.wasUpdated !== prevProps.wasUpdated) {
-            this.props.fetchData("http://localhost:5000/favourites")
-        }
     }
 
     addCity = (cityName) => {

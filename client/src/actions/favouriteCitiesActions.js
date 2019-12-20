@@ -45,9 +45,11 @@ export function addCity(data) {
         })
             .then(response => response.json())
             .then(response => {
-                alert(response.dbError);
+                if (response.dbError) {
+                    throw new Error(response.dbError);
+                }
             })
-            .catch(()=>{console.log("Something went wrong while adding new city")})
+            .catch((response)=>{ alert(response)})
     }
 }
 

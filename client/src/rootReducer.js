@@ -1,4 +1,4 @@
-import {ADD_CITY, REMOVE_CITY, FETCH_DATA_SUCCESS} from './actions/actions';
+/*import {ADD_CITY, REMOVE_CITY, FETCH_DATA_SUCCESS} from './actions/actions';
 
 const initialState = {
     cities: []
@@ -17,10 +17,11 @@ function rootReducer(state = initialState, action) {
                 cities: state.cities.filter(function (city) {
                     return city.id !== action.payload.id;
                 })
-            });*/
+            });//
         default:
             return state;
     }
 }
 
 export default rootReducer;
+*/

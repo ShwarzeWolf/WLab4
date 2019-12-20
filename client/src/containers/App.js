@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import CurrentCity from './components/CurrentCity'
-import FavouriteCities from './components/FavouriteCities'
+import { connect } from "react-redux";
+import CurrentCity from '../components/CurrentCity'
+import FavouriteCities from '../components/FavouriteCities'
 
 class App extends Component {
     render() {

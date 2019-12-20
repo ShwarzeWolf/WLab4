@@ -3,13 +3,51 @@ import {connect} from "react-redux";
 import WeatherBlock from "./WeatherBlock";
 import RemoveCity from "./RemoveCity";
 import AddCity from "./AddCity";
-import {addCity, removeCity, fetchFavouriteCities} from "../actions/actions"
+import {addCity, removeCity} from "../actions/actions"
 
+import {fetchFavouriteCities} from "../actions/favouriteCitiesActions";
+
+class FavouriteCities extends Component {
+    componentDidMount() {
+        this.props.fetchData("http://localhost:5000/favourites")
+    }
+
+    render() {
+            return (
+                <div className="favouriteCities">
+                    <h1 className="blockHeader">Избранное </h1>
+                    <ul>{this.props.cities.map((city, index)=>{
+                        return <li key={index}>
+                            <div> {city.cityname}</div>
+                            <div>{city.cityid}</div>
+                        </li>
+                    })}
+                    </ul>
+                </div>
+            );
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        cities: state.cities
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchData: url=> (dispatch(fetchFavouriteCities(url)))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FavouriteCities);
+
+/*
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: url => dispatch(fetchFavouriteCities(url)) /*,
         addCity: city => dispatch(addCity(city)),
-        removeCity: city => dispatch(removeCity(city)),*/
+        removeCity: city => dispatch(removeCity(city)),
     };
 };
 
@@ -47,7 +85,7 @@ class ConnectedFavouriteCities extends Component {
                 <WeatherBlock cityName={city.name}/>
             </div>
         );
-    };*/
+    };
 
     componentDidMount() {
         this.props.fetchData("http://localhost:5000/favourites");
@@ -70,10 +108,11 @@ class ConnectedFavouriteCities extends Component {
 /*<div className="favouriteCity">{
                     this.formatCities(this.props.cities)
                 }</div>*/
-/*<AddCity addCity={this.addCity}/>*/
+/*<AddCity addCity={this.addCity}/>
 const FavouriteCities = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ConnectedFavouriteCities);
 
 export default FavouriteCities
+*/

@@ -14,7 +14,7 @@ const postTableData = (req, res, db) => {
     db.select('*').from('favourites.cities').where({cityname})
         .then(items => {
            if (items.length !== 0) {
-               res.json({"dbError": "value already in database"});
+               res.status(400).json({"dbError": "value already in database"});
            }
            else
                axios.get(API_URL + 'q=' + cityname)
@@ -24,8 +24,8 @@ const postTableData = (req, res, db) => {
                            .then(item => {
                                res.json(item)
                            })
-                           .catch(err => res.json({dbError: err.toString()}));
-                   }).catch(err => res.json({dbError: "invalid cityname"}));
+                           .catch(err => res.status(400).json({dbError: err.toString()}));
+                   }).catch(err => res.status(400).json({dbError: "invalid cityname"}));
         });
 };
 

@@ -13,6 +13,7 @@ export function fetchFavouriteCities(url){
             .then(response => {
                 if (!response.ok)
                     throw new Error(response.statusText);
+
                 dispatch(citiesIsLoading(false));
                 return response;
             })
@@ -37,17 +38,15 @@ export function citiesIsLoading(bool) {
 }
 
 export function addCity(data) {
-    //check if city makes sense
-    //check if city exists in database
     return dispatch => {
         let url = "http://localhost:5000/favourites?cityname=" + data.cityname;
         fetch(url, {
             method: "POST"
         })
-            .then(response => {
-                return response
-            })
             .then(response => response.json())
+            .then(response => {
+                alert(response.dbError);
+            })
             .catch(()=>{console.log("Something went wrong while adding new city")})
     }
 }

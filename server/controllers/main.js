@@ -1,20 +1,13 @@
 const getTableData = (req, res, db) => {
     db.select('*').from('favourites.cities')
-        .then(items => {
-            if(items.length){
-                res.json(items)
-            } else {
-                res.json({dataExists: 'false'})
-            }
-        })
+        .then(items => res.json(items))
         .catch(err => res.status(400).json({dbError: 'db error'}))
 };
 
 const postTableData = (req, res, db) => {
-    const cityid = req.query.cityid;
     const cityname = req.query.cityname;
 
-    db('favourites.cities').insert({cityid, cityname})
+    db('favourites.cities').insert({cityname})
         .returning('*')
         .then(item => {
             res.json(item)
@@ -23,10 +16,9 @@ const postTableData = (req, res, db) => {
 };
 
 const deleteTableData = (req, res, db) => {
-    const cityid = req.query.cityid;
+    const id = req.query.cityid;
 
-    console.log(cityid);
-    db('favourites.cities').where({cityid}).del()
+    db('favourites.cities').where({id}).del()
         .then(() => {
             res.json({delete: 'true'})
         })

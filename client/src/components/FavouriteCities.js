@@ -7,17 +7,21 @@ import AddCity from "./AddCity";
 import {fetchFavouriteCities, addCity, removeCity} from "../actions/favouriteCitiesActions";
 
 class FavouriteCities extends Component {
+
     componentDidMount() {
         this.props.fetchData("http://localhost:5000/favourites")
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.wasUpdated !== prevProps.wasUpdated) {
+            this.props.fetchData("http://localhost:5000/favourites")
+        }
+    }
+
     addCity = (cityName) => {
-        const timeAdded = Date.now();
         this.props.addCity({
-            name: cityName,
-            timeAdded: timeAdded
+            cityname: cityName
         });
-        console.log(this.props.cities);
     };
 
     removeCity = (city) => {
@@ -26,9 +30,14 @@ class FavouriteCities extends Component {
 
     formatCities = (cities) => {
         console.log(cities);
+
+        if (cities.length === 0) {
+            return <p> There are now favourite cities yet</p>;
+        }
+
         return cities.map((city) =>
             <div className="weatherBlock"
-                 key={city.cityid}>
+                 key={city.id}>
                 <RemoveCity city={city} removeCity={this.removeCity}/>
                 <WeatherBlock cityName={city.cityname}/>
             </div>
@@ -44,13 +53,12 @@ class FavouriteCities extends Component {
         }
             return (
                 <div className="favouriteCities">
-                    <h1 className="blockHeader">Избранное </h1>
+                    <h1 className="blockHeader">Избранное</h1>
                     <AddCity addCity={this.addCity}/>
                     <div className="favouriteCity">{
                         this.formatCities(this.props.cities)
                     }
                     </div>
-
                 </div>
             );
     }
@@ -68,7 +76,7 @@ const mapDispatchToProps = dispatch => {
     return {
         addCity: city => dispatch(addCity(city)),
         removeCity: city => dispatch(removeCity(city)),
-        fetchData: url=> (dispatch(fetchFavouriteCities(url)))
+        fetchData: url => (dispatch(fetchFavouriteCities(url)))
     };
 };
 

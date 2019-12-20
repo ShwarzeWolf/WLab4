@@ -36,17 +36,42 @@ export function citiesIsLoading(bool) {
     }
 }
 
-export function addCity(payload) {
+export function citiesUpdated(bool) {
     return {
-        type: "ADD_CITY",
-        payload
+        type: "CITIES_WAS_UPDATED",
+        wasUpdated: bool
     }
 }
 
-export function removeCity(payload) {
-    return {
-        type: "REMOVE_CITY",
-        payload
+export function addCity(data) {
+    //check if city makes sense
+    //check if city exists in database
+    return dispatch => {
+        let url = "http://localhost:5000/favourites?cityname=" + data.cityname;
+        fetch(url, {
+            method: "POST"
+        })
+            .then(response => {
+                dispatch(citiesUpdated(true));
+                return response
+            })
+            .then(response => response.json())
+            .then(cities => console.log(cities))
+            .catch(()=>{console.log("Something went wrong while adding new city")})
     }
 }
 
+export function removeCity(data) {
+    return dispatch => {
+        let url = "http://localhost:5000/favourites?cityid=" + data.id;
+        fetch(url, {
+            method: "DELETE"
+        })
+            .then(response => {
+                dispatch(citiesUpdated(true));
+                return response
+            })
+            .then(response => response.json())
+            .catch(()=> {console.log("Something went wrong while deleting city")})
+    }
+}

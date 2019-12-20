@@ -6,3 +6,21 @@ export function cities(state = [], action){
             return state;
     }
 }
+
+export function citiesHasErrored(state = false, action){
+    switch (action.type) {
+        case "CITIES_HAS_ERRORED":
+            return action.hasErrored;
+        default:
+            return state;
+    }
+}
+
+export function citiesIsLoading(state = false, action) {
+    switch (action.type) {
+        case "CITIES_IS_LOADING":
+            return action.isLoading;
+        default:
+            return state;
+    }
+}

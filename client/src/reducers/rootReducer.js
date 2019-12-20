@@ -1,8 +1,10 @@
 import {combineReducers} from "redux";
-import {cities} from "./cities";
+import {cities, citiesHasErrored, citiesIsLoading} from "./cities";
 
 const rootReducer = combineReducers({
-    cities
+    cities,
+    citiesHasErrored,
+    citiesIsLoading
 });
 
 export default rootReducer;

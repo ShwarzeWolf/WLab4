@@ -13,6 +13,12 @@ class FavouriteCities extends Component {
     }
 
     render() {
+        if(this.props.hasErrored){
+            return <p> Извините, произошла ошибка при загрузке избранных городов</p>
+        }
+        if(this.props.isLoading){
+            return <p> Загрузка... </p>
+        }
             return (
                 <div className="favouriteCities">
                     <h1 className="blockHeader">Избранное </h1>
@@ -30,7 +36,9 @@ class FavouriteCities extends Component {
 
 const mapStateToProps = state => {
     return {
-        cities: state.cities
+        cities: state.cities,
+        hasErrored: state.citiesHasErrored,
+        isLoading: state.citiesIsLoading
     };
 };
 

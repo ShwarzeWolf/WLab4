@@ -1,5 +1,5 @@
 const axios = require('axios');
-const API_URL = 'https://api.openweathermap.org/data/2.5/weather?appid=f51bcfb8b207b0ef58ce10da80b90477&';
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather?appid=41210752a269dfb2e2a8167a0910c3a1&';
 
 
 const getTableData = (req, res, db) => {

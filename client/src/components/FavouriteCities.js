@@ -22,8 +22,6 @@ class FavouriteCities extends Component {
     };
 
     formatCities = (cities) => {
-        console.log(cities);
-
         if (cities.length === 0) {
             return <p> There are now favourite cities yet</p>;
         }

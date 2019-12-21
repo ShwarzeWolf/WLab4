@@ -24,12 +24,3 @@ export function citiesIsLoading(state = false, action) {
             return state;
     }
 }
-
-export function citiesUpdated(state = false, action) {
-    switch (action.type) {
-        case "PERSONS_WAS_UPDATED":
-            return action.wasUpdated;
-        default:
-            return state;
-    }
-}

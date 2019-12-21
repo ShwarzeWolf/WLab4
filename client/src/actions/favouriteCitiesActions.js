@@ -49,7 +49,7 @@ export function addCity(data) {
                     throw new Error(response.dbError);
                 }
             })
-            .catch((response)=>{ alert(response)})
+            .catch(error =>{ alert(error.toString())})
     }
 }
 
@@ -63,6 +63,6 @@ export function removeCity(data) {
                 return response
             })
             .then(response => response.json())
-            .catch(()=> {console.log("Something went wrong while deleting city")})
+            .catch((error)=> {console.log("Something went wrong while deleting a city")})
     }
 }

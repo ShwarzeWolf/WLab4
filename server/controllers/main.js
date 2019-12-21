@@ -1,7 +1,6 @@
 const axios = require('axios');
 const API_URL = 'https://api.openweathermap.org/data/2.5/weather?appid=41210752a269dfb2e2a8167a0910c3a1&';
 
-
 const getTableData = (req, res, db) => {
     db.select('*').from('favourites.cities')
         .then(items => res.json(items))
@@ -9,7 +8,7 @@ const getTableData = (req, res, db) => {
 };
 
 const postTableData = (req, res, db) => {
-    const cityname = req.query.cityname;
+    const cityname = req.query.cityname.toUpperCase();
 
     db.select('*').from('favourites.cities').where({cityname})
         .then(items => {

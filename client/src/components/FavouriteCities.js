@@ -7,8 +7,16 @@ import AddCity from "./AddCity";
 import {fetchFavouriteCities, addCity, removeCity} from "../actions/favouriteCitiesActions";
 
 class FavouriteCities extends Component {
+
     componentDidMount() {
         this.props.fetchData("http://localhost:5000/favourites")
+    }
+
+    componentDidUpdate(prevProps) {
+        console.log(this.props);
+        if(this.props.wasUpdated !== prevProps.wasUpdated) {
+            this.props.fetchData("http://localhost:5000/favourites")
+        }
     }
 
     addCity = (cityName) => {
@@ -22,6 +30,8 @@ class FavouriteCities extends Component {
     };
 
     formatCities = (cities) => {
+        console.log(cities);
+
         if (cities.length === 0) {
             return <p> There are now favourite cities yet</p>;
         }
@@ -59,7 +69,8 @@ const mapStateToProps = state => {
     return {
         cities: state.cities,
         hasErrored: state.citiesHasErrored,
-        isLoading: state.citiesIsLoading
+        isLoading: state.citiesIsLoading,
+        wasUpdated: state.citiesUpdated
     };
 };
 
@@ -67,7 +78,7 @@ const mapDispatchToProps = dispatch => {
     return {
         addCity: city => dispatch(addCity(city)),
         removeCity: city => dispatch(removeCity(city)),
-        fetchData: url => (dispatch(fetchFavouriteCities(url)))
+        fetchData: url => dispatch(fetchFavouriteCities(url))
     };
 };
 

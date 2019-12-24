@@ -35,7 +35,9 @@ class CurrentCity extends Component{
         event.preventDefault();
         navigator.geolocation.getCurrentPosition(
             position => this.getLocationSuccess(position),
-            this.getLocationFailed);
+            function() {
+                alert("GEO access denied. Change setting in browser for this site")
+            });
     };
 
     render(){

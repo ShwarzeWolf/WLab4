@@ -5,39 +5,48 @@ class CurrentCity extends Component{
     constructor(props){
         super(props);
         this.state = {
-            cityName : "Surgut",
+            cityName : undefined,
             latitude : undefined,
             longitude: undefined
         };
 
         this.getLocationButtonPress = this.getLocationButtonPress.bind(this);
+        this.getLocationSuccess = this.getLocationSuccess.bind(this);
+        this.getLocationFailed = this.getLocationFailed.bind(this);
     }
 
-    getLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((position => {
-                this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    cityName: undefined
-                });
-            }));
-        } else {
-            this.setState({
-                latitude: undefined,
-                longitude: undefined,
-                cityName: "Surgut"
-            });
-        }
+    getLocationSuccess = (position) => {
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            cityName: undefined
+        });
+    };
+
+    getLocationFailed = () => {
+        this.setState({
+            latitude: undefined,
+            longitude: undefined,
+            cityName: "Surgut"
+        });
     };
 
     getLocationButtonPress = (event) => {
         event.preventDefault();
-        this.getLocation()
+        navigator.geolocation.getCurrentPosition(
+            position => this.getLocationSuccess(position),
+            this.getLocationFailed);
     };
 
     render(){
-        navigator.geolocation.getCurrentPosition(function(){});
+        navigator.geolocation.getCurrentPosition(
+            position => this.getLocationSuccess(position),
+            this.getLocationFailed);
+
+        if (typeof(this.state.cityName) == "undefined" &&
+            typeof(this.state.longitude) == "undefined" &&
+            typeof(this.state.latitude) == "undefined")
+            return (<h1>Получение инфорации о геолокации...</h1>);
 
         return(
             <div className="currentCity">
